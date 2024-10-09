@@ -3,4 +3,6 @@ project(PEA_projekt_1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(PEA_projekt_1 main.cpp)
+add_executable(PEA_projekt_1 main.cpp
+        Menu.cpp
+        Menu.h)
