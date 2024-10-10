@@ -4,9 +4,17 @@
 
 #ifndef PEA_PROJEKT_1_MATRIXMODEL_H
 #define PEA_PROJEKT_1_MATRIXMODEL_H
+#include <string>
 
-
-class matrixModel {
+class MatrixModel {
+private:
+    void initMatrix();  //Utworzenie macierzy o rozmiarze n wypełnionej zerami
+public:
+    int **matrix;
+    int n; //Rozmiar macierzy
+    void freeMatrix();
+    void displayMatrix();
+    void loadMatrixFromFile(std::string path);
 
 };
 

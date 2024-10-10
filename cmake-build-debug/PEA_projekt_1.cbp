@@ -82,6 +82,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Mateusz/CLionProjects/PEA-projekt-1/BruteForce.cpp">
+			<Option target="PEA_projekt_1"/>
+		</Unit>
+		<Unit filename="C:/Users/Mateusz/CLionProjects/PEA-projekt-1/BruteForce.h">
+			<Option target="PEA_projekt_1"/>
+		</Unit>
+		<Unit filename="C:/Users/Mateusz/CLionProjects/PEA-projekt-1/MatrixModel.cpp">
+			<Option target="PEA_projekt_1"/>
+		</Unit>
+		<Unit filename="C:/Users/Mateusz/CLionProjects/PEA-projekt-1/MatrixModel.h">
+			<Option target="PEA_projekt_1"/>
+		</Unit>
 		<Unit filename="C:/Users/Mateusz/CLionProjects/PEA-projekt-1/Menu.cpp">
 			<Option target="PEA_projekt_1"/>
 		</Unit>
