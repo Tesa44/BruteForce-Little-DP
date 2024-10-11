@@ -96,21 +96,53 @@ CMakeFiles/PEA_projekt_1.dir/Menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PEA_projekt_1.dir/Menu.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Mateusz\CLionProjects\PEA-projekt-1\Menu.cpp -o CMakeFiles\PEA_projekt_1.dir\Menu.cpp.s
 
+CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj: CMakeFiles/PEA_projekt_1.dir/flags.make
+CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj: C:/Users/Mateusz/CLionProjects/PEA-projekt-1/MatrixModel.cpp
+CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj: CMakeFiles/PEA_projekt_1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Mateusz\CLionProjects\PEA-projekt-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj -MF CMakeFiles\PEA_projekt_1.dir\MatrixModel.cpp.obj.d -o CMakeFiles\PEA_projekt_1.dir\MatrixModel.cpp.obj -c C:\Users\Mateusz\CLionProjects\PEA-projekt-1\MatrixModel.cpp
+
+CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Mateusz\CLionProjects\PEA-projekt-1\MatrixModel.cpp > CMakeFiles\PEA_projekt_1.dir\MatrixModel.cpp.i
+
+CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Mateusz\CLionProjects\PEA-projekt-1\MatrixModel.cpp -o CMakeFiles\PEA_projekt_1.dir\MatrixModel.cpp.s
+
+CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj: CMakeFiles/PEA_projekt_1.dir/flags.make
+CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj: C:/Users/Mateusz/CLionProjects/PEA-projekt-1/BruteForce.cpp
+CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj: CMakeFiles/PEA_projekt_1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Mateusz\CLionProjects\PEA-projekt-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj -MF CMakeFiles\PEA_projekt_1.dir\BruteForce.cpp.obj.d -o CMakeFiles\PEA_projekt_1.dir\BruteForce.cpp.obj -c C:\Users\Mateusz\CLionProjects\PEA-projekt-1\BruteForce.cpp
+
+CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Mateusz\CLionProjects\PEA-projekt-1\BruteForce.cpp > CMakeFiles\PEA_projekt_1.dir\BruteForce.cpp.i
+
+CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Mateusz\CLionProjects\PEA-projekt-1\BruteForce.cpp -o CMakeFiles\PEA_projekt_1.dir\BruteForce.cpp.s
+
 # Object files for target PEA_projekt_1
 PEA_projekt_1_OBJECTS = \
 "CMakeFiles/PEA_projekt_1.dir/main.cpp.obj" \
-"CMakeFiles/PEA_projekt_1.dir/Menu.cpp.obj"
+"CMakeFiles/PEA_projekt_1.dir/Menu.cpp.obj" \
+"CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj" \
+"CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj"
 
 # External object files for target PEA_projekt_1
 PEA_projekt_1_EXTERNAL_OBJECTS =
 
 PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/main.cpp.obj
 PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/Menu.cpp.obj
+PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj
+PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj
 PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/build.make
 PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/linkLibs.rsp
 PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/objects1.rsp
 PEA_projekt_1.exe: CMakeFiles/PEA_projekt_1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Mateusz\CLionProjects\PEA-projekt-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable PEA_projekt_1.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Mateusz\CLionProjects\PEA-projekt-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable PEA_projekt_1.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\PEA_projekt_1.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

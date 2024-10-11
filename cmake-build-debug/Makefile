@@ -128,6 +128,54 @@ PEA_projekt_1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/build
 .PHONY : PEA_projekt_1/fast
 
+BruteForce.obj: BruteForce.cpp.obj
+.PHONY : BruteForce.obj
+
+# target to build an object file
+BruteForce.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj
+.PHONY : BruteForce.cpp.obj
+
+BruteForce.i: BruteForce.cpp.i
+.PHONY : BruteForce.i
+
+# target to preprocess a source file
+BruteForce.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.i
+.PHONY : BruteForce.cpp.i
+
+BruteForce.s: BruteForce.cpp.s
+.PHONY : BruteForce.s
+
+# target to generate assembly for a file
+BruteForce.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.s
+.PHONY : BruteForce.cpp.s
+
+MatrixModel.obj: MatrixModel.cpp.obj
+.PHONY : MatrixModel.obj
+
+# target to build an object file
+MatrixModel.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj
+.PHONY : MatrixModel.cpp.obj
+
+MatrixModel.i: MatrixModel.cpp.i
+.PHONY : MatrixModel.i
+
+# target to preprocess a source file
+MatrixModel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.i
+.PHONY : MatrixModel.cpp.i
+
+MatrixModel.s: MatrixModel.cpp.s
+.PHONY : MatrixModel.s
+
+# target to generate assembly for a file
+MatrixModel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.s
+.PHONY : MatrixModel.cpp.s
+
 Menu.obj: Menu.cpp.obj
 .PHONY : Menu.obj
 
@@ -185,6 +233,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... PEA_projekt_1
+	@echo ... BruteForce.obj
+	@echo ... BruteForce.i
+	@echo ... BruteForce.s
+	@echo ... MatrixModel.obj
+	@echo ... MatrixModel.i
+	@echo ... MatrixModel.s
 	@echo ... Menu.obj
 	@echo ... Menu.i
 	@echo ... Menu.s

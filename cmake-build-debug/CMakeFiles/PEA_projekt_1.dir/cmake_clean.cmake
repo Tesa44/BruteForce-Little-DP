@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj"
+  "CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj.d"
+  "CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj"
+  "CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj.d"
   "CMakeFiles/PEA_projekt_1.dir/Menu.cpp.obj"
   "CMakeFiles/PEA_projekt_1.dir/Menu.cpp.obj.d"
   "CMakeFiles/PEA_projekt_1.dir/main.cpp.obj"
