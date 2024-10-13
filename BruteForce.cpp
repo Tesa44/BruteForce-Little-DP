@@ -4,6 +4,8 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string>
+#include <typeinfo>
 #include "BruteForce.h"
 
 using namespace std;
@@ -43,7 +45,6 @@ int* BruteForce::algorithm(int **matrix, int n) {
     for (int i = 0; i < n; i++) {
         cities[i] = i;
     }
-
     //Pierwsza permutacja
     int curPath = 0;
     for (int i = 0; i < n; i ++) {
@@ -56,10 +57,9 @@ int* BruteForce::algorithm(int **matrix, int n) {
         }
     }
     minPath = curPath;
-
     //Generowanie kolejnych permutacji
     while (nextPermutation(cities, n)) {
-        int *curRoute = new int[n+1]; //Tablica przechowująca bieżącą drogę
+        int *curRoute = new int[n + 1]; //Tablica przechowująca bieżącą drogę
         curPath = 0;
         for (int i = 0; i < n - 1; i ++) {
             curCity = cities[i];
@@ -67,6 +67,9 @@ int* BruteForce::algorithm(int **matrix, int n) {
             curRoute[i] = curCity;
             curPath += matrix[curCity][nextCity];
         }
+        //Dopisanie ostatniego miasta
+        curRoute[n-1] = nextCity;
+
         //Droga z ostatniego miasta do miasta startowego
         startCity = cities[0];
         curCity = cities[n-1];
@@ -75,7 +78,7 @@ int* BruteForce::algorithm(int **matrix, int n) {
         //Sprawdzanie, czy bieżąca droga może być drogą najkrótszą i ewentualne jej zapamiętanie
         if (curPath < minPath) {
             minPath = curPath;
-            copyArray(curRoute,minRoute, n+1);
+            memcpy(minRoute, curRoute, (n+1) * sizeof(int));
         }
         delete[] curRoute;
     }
@@ -103,18 +106,21 @@ int BruteForce::countRoute(int **matrix, int *routeArr, int n) {
 void BruteForce::displayRoute(int **matrix, int *route, int n) {
     int curCity, nextCity, lastCity;
     int routeLen = n + 1;
+    //cout << "routeLen: " << routeLen << endl;
     for (int i = 0; i < routeLen-1; i++) {
         curCity = route[i];
         nextCity = route[i+1];
-        cout << curCity << "   " << nextCity << endl;
+        //cout << curCity << "   " << nextCity << endl;
         printf("%d -(%d)-> ",curCity,matrix[curCity][nextCity]);
     }
     lastCity = route[routeLen-1];
     printf("%d\n", lastCity);
 }
 
-void BruteForce::copyArray(int *arr1, int *arr2, int n) {
+void BruteForce::displayArray(int *arr,int n) {
+    cout << "[ ";
     for (int i = 0; i < n; i++) {
-        arr2[i] = arr1[i];
+        cout << arr[i] << " ";
     }
+    cout << "]" << endl;
 }
