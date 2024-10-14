@@ -52,3 +52,30 @@ void MatrixModel::displayMatrix() {
         printf("\n");
     }
 }
+
+void MatrixModel::generateMatrix(int matrixSize) {
+    //Ustawienie globalnego rozmiaru macierzy
+    n = matrixSize;
+
+    initMatrix();
+    //TODO init CONFIG class and add maxPath, minPath
+    int maxPath = 15;
+    int minPath = 1;
+    int path;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j) matrix[i][j] = 0;
+            else {
+                path = minPath + (rand() % ( maxPath - minPath + 1 ));
+                matrix[i][j] = path;
+            }
+        }
+    }
+
+
+
+
+
+
+
+}

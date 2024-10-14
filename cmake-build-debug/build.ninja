@@ -79,6 +79,12 @@ build CMakeFiles/PEA_projekt_1.dir/Helpers.cpp.obj: CXX_COMPILER__PEA_projekt_1_
   OBJECT_DIR = CMakeFiles\PEA_projekt_1.dir
   OBJECT_FILE_DIR = CMakeFiles\PEA_projekt_1.dir
 
+build CMakeFiles/PEA_projekt_1.dir/App.cpp.obj: CXX_COMPILER__PEA_projekt_1_unscanned_Debug C$:/Users/mateu/CLionProjects/PEA-projekt-1/App.cpp || cmake_object_order_depends_target_PEA_projekt_1
+  DEP_FILE = CMakeFiles\PEA_projekt_1.dir\App.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\PEA_projekt_1.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_projekt_1.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target PEA_projekt_1
@@ -87,7 +93,7 @@ build CMakeFiles/PEA_projekt_1.dir/Helpers.cpp.obj: CXX_COMPILER__PEA_projekt_1_
 #############################################
 # Link the executable PEA_projekt_1.exe
 
-build PEA_projekt_1.exe: CXX_EXECUTABLE_LINKER__PEA_projekt_1_Debug CMakeFiles/PEA_projekt_1.dir/main.cpp.obj CMakeFiles/PEA_projekt_1.dir/Menu.cpp.obj CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj CMakeFiles/PEA_projekt_1.dir/Helpers.cpp.obj
+build PEA_projekt_1.exe: CXX_EXECUTABLE_LINKER__PEA_projekt_1_Debug CMakeFiles/PEA_projekt_1.dir/main.cpp.obj CMakeFiles/PEA_projekt_1.dir/Menu.cpp.obj CMakeFiles/PEA_projekt_1.dir/MatrixModel.cpp.obj CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.obj CMakeFiles/PEA_projekt_1.dir/Helpers.cpp.obj CMakeFiles/PEA_projekt_1.dir/App.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\PEA_projekt_1.dir

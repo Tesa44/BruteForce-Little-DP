@@ -11,4 +11,6 @@ add_executable(PEA_projekt_1 main.cpp
         BruteForce.cpp
         BruteForce.h
         Helpers.cpp
-        Helpers.h)
+        Helpers.h
+        App.cpp
+        App.h)

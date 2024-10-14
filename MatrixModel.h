@@ -15,6 +15,7 @@ public:
     void freeMatrix();
     void displayMatrix();
     void loadMatrixFromFile(std::string path);
+    void generateMatrix(int matrixSize);
 
 };
 
