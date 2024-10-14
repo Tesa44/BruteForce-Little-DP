@@ -116,11 +116,3 @@ void BruteForce::displayRoute(int **matrix, int *route, int n) {
     lastCity = route[routeLen-1];
     printf("%d\n", lastCity);
 }
-
-void BruteForce::displayArray(int *arr,int n) {
-    cout << "[ ";
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << "]" << endl;
-}

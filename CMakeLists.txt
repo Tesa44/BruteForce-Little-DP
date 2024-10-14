@@ -9,4 +9,6 @@ add_executable(PEA_projekt_1 main.cpp
         MatrixModel.cpp
         MatrixModel.h
         BruteForce.cpp
-        BruteForce.h)
+        BruteForce.h
+        Helpers.cpp
+        Helpers.h)
