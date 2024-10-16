@@ -71,11 +71,10 @@ void MatrixModel::generateMatrix(int matrixSize) {
             }
         }
     }
+}
 
-
-
-
-
-
-
+void MatrixModel::freeMatrix() {
+    for (int i = 0; i < n; ++i)
+        delete [] matrix[i];
+    delete [] matrix;
 }

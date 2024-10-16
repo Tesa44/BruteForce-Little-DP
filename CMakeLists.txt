@@ -13,4 +13,6 @@ add_executable(PEA_projekt_1 main.cpp
         Helpers.cpp
         Helpers.h
         App.cpp
-        App.h)
+        App.h
+        Little.cpp
+        Little.h)
