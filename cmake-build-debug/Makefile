@@ -128,6 +128,30 @@ PEA_projekt_1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/build
 .PHONY : PEA_projekt_1/fast
 
+App.obj: App.cpp.obj
+.PHONY : App.obj
+
+# target to build an object file
+App.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/App.cpp.obj
+.PHONY : App.cpp.obj
+
+App.i: App.cpp.i
+.PHONY : App.i
+
+# target to preprocess a source file
+App.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/App.cpp.i
+.PHONY : App.cpp.i
+
+App.s: App.cpp.s
+.PHONY : App.s
+
+# target to generate assembly for a file
+App.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/App.cpp.s
+.PHONY : App.cpp.s
+
 BruteForce.obj: BruteForce.cpp.obj
 .PHONY : BruteForce.obj
 
@@ -151,6 +175,54 @@ BruteForce.s: BruteForce.cpp.s
 BruteForce.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/BruteForce.cpp.s
 .PHONY : BruteForce.cpp.s
+
+Helpers.obj: Helpers.cpp.obj
+.PHONY : Helpers.obj
+
+# target to build an object file
+Helpers.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/Helpers.cpp.obj
+.PHONY : Helpers.cpp.obj
+
+Helpers.i: Helpers.cpp.i
+.PHONY : Helpers.i
+
+# target to preprocess a source file
+Helpers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/Helpers.cpp.i
+.PHONY : Helpers.cpp.i
+
+Helpers.s: Helpers.cpp.s
+.PHONY : Helpers.s
+
+# target to generate assembly for a file
+Helpers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/Helpers.cpp.s
+.PHONY : Helpers.cpp.s
+
+Little.obj: Little.cpp.obj
+.PHONY : Little.obj
+
+# target to build an object file
+Little.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/Little.cpp.obj
+.PHONY : Little.cpp.obj
+
+Little.i: Little.cpp.i
+.PHONY : Little.i
+
+# target to preprocess a source file
+Little.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/Little.cpp.i
+.PHONY : Little.cpp.i
+
+Little.s: Little.cpp.s
+.PHONY : Little.s
+
+# target to generate assembly for a file
+Little.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PEA_projekt_1.dir\build.make CMakeFiles/PEA_projekt_1.dir/Little.cpp.s
+.PHONY : Little.cpp.s
 
 MatrixModel.obj: MatrixModel.cpp.obj
 .PHONY : MatrixModel.obj
@@ -233,9 +305,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... PEA_projekt_1
+	@echo ... App.obj
+	@echo ... App.i
+	@echo ... App.s
 	@echo ... BruteForce.obj
 	@echo ... BruteForce.i
 	@echo ... BruteForce.s
+	@echo ... Helpers.obj
+	@echo ... Helpers.i
+	@echo ... Helpers.s
+	@echo ... Little.obj
+	@echo ... Little.i
+	@echo ... Little.s
 	@echo ... MatrixModel.obj
 	@echo ... MatrixModel.i
 	@echo ... MatrixModel.s

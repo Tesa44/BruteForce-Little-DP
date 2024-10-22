@@ -12,36 +12,55 @@ using namespace std;
 void Little::algorithm(int **matrix, int n) {
     Helpers helpers;
     //Macierz, która będzie redukowana
-    int** matrixReduced = new int*[n];
-    for (int i = 0; i < n; i++){
-        matrixReduced[i] = new int[n];
+    int** matrixToReduce = new int*[n+1];
+    for (int i = 0; i < n+1; i++){
+        matrixToReduce[i] = new int[n+1];
     }
     //Kopiujemy wartości z macierzy, aby nie pracować na oryginalnej oraz zmieniamy wartości 0 na inf
+    //Dodajemy numery wierszy i kolumn
     for (int i = 0; i< n; i++) {
         for (int j = 0; j < n; j++) {
-            if (matrix[i][j] == 0) matrixReduced[i][j] = 99;
-            else matrixReduced[i][j] = matrix[i][j];
+            if (matrix[i][j] == 0) matrixToReduce[i+1][j+1] = 99;
+            else matrixToReduce[i+1][j+1] = matrix[i][j];
+
         }
     }
+    for (int i = 0; i < n+1 ; i++ ) {
+        matrixToReduce[0][i] = i;
+        matrixToReduce[i][0] = i;
+    }
+    n = n+1;
 
-    int r = reduceMatrix(matrixReduced,n);
+    for (int i = 0; i< n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrixToReduce[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    int r = reduceMatrix(matrixToReduce,n);
 
-    int mp = countZeros(matrixReduced, n);
+    for (int i = 0; i< n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrixToReduce[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << "r: " << r << endl;
+
+    int mp = countZeros(matrixToReduce, n);
     path* paths = new path[mp];
-    paths = getMinPaths(matrixReduced,n,mp);
-    //displayArrPath(paths);
+    paths = getMinPaths(matrixToReduce,n,mp);
+    displayArrPath(paths);
 
-//    for (int i = 0; i< n; i++) {
-//        for (int j = 0; j < n; j++) {
-//            cout << matrixReduced[i][j] << " ";
-//        }
-//        cout << endl;
-//    }
+
+
+
 }
 
 int Little::findMin(int *arr, int n) {
-   int min = arr[0];
-   for (int i = 1 ; i < n ; i++) {
+   int min = arr[1];
+   for (int i = 2 ; i < n ; i++) {
        if (arr[i] < min) min = arr[i];
    }
    return min;
@@ -52,22 +71,22 @@ int Little::reduceMatrix(int **matrix, int n) {
 
     //Szukamy wartości minimalnych w każdym wierszu
     int* minRows = new int[n];
-    for (int i = 0; i < n ; i++) {
+    for (int i = 1; i < n ; i++) {
         minRows[i] = findMin(matrix[i], n);
         r += minRows[i];
     }
     //helpers.displayArray(minRows,n);
 
     //Odejmujemy minimalne wartości od każdego elementu w wierszu
-    for (int i = 0; i< n; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 1; i< n; i++) {
+        for (int j = 1; j < n; j++) {
             if (matrix[i][j] != 99) matrix[i][j] = matrix[i][j] - minRows[i];
         }
     }
 
     //Szukamy wartości minimalnych w każdej kolumnie
     int* minCols = new int[n];
-    for (int i = 0; i < n ; i++) {
+    for (int i = 1; i < n ; i++) {
         int *curCol = new int[n];
         for (int j = 0; j < n; j++) curCol[j] = matrix[j][i];
         minCols[i] = findMin(curCol, n);
@@ -77,8 +96,8 @@ int Little::reduceMatrix(int **matrix, int n) {
     //helpers.displayArray(minCols,n);
 
     //Odejmujemy minimalne wartości od każdego elementu w kolumnie
-    for (int i = 0; i< n; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 1; i < n; i++) {
+        for (int j = 1; j < n; j++) {
             if (matrix[j][i] != 99) matrix[j][i] = matrix[j][i] - minCols[i];
         }
     }
@@ -90,8 +109,8 @@ int Little::reduceMatrix(int **matrix, int n) {
 Little::path* Little::getMinPaths(int **matrix, int n, int mpSize) {
     path* minPaths = new path[mpSize + 1];
     int pathCounter = 0;
-    for (int i = 0; i < n ; i++) {
-        for (int j = 0 ; j < n; j++) {
+    for (int i = 1; i < n ; i++) {
+        for (int j = 1 ; j < n; j++) {
             if (matrix[i][j] == 0) {
                 path p;
                 p.row = i;
@@ -99,12 +118,10 @@ Little::path* Little::getMinPaths(int **matrix, int n, int mpSize) {
                 //Szukamy najmniejszego elementu w wierszu i w kolumnie nie licząc elementu ij
                 int minR = 99;
                 int minC = 99;
-                cout << "wiersz: ";
-                for (int r = 0; r < n ; r++) {
+                for (int r = 1; r < n ; r++) {
                     if (r != j && matrix[i][r] < minR)  minR = matrix[i][r];
                     if (r != i && matrix[r][j] < minC) minC = matrix[r][j];
                 }
-                cout << endl;
                 p.cost = minR + minC;
                 minPaths[pathCounter] = p;
                 pathCounter ++;
@@ -112,14 +129,13 @@ Little::path* Little::getMinPaths(int **matrix, int n, int mpSize) {
         }
     }
     minPaths[mpSize] = arrPathEnd;
-    displayArrPath(minPaths);
     return minPaths;
 }
 
 int Little::countZeros(int **matrix, int n) {
     int zeroCounter = 0;
-    for (int i = 0; i < n ; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 1; i < n ; i++) {
+        for (int j = 1; j < n; j++) {
             if (matrix[i][j] == 0) zeroCounter ++;
         }
     }

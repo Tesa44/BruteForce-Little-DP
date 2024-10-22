@@ -12,6 +12,7 @@ public:
     int findMin(int* arr, int n);
 private:
     int reduceMatrix(int** matrix, int n);
+    void deleteRowAndCol(int **matrix, int n, int row, int col);
     struct path {
         int row;
         int column;
