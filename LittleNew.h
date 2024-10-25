@@ -15,7 +15,7 @@ const int INF = std::numeric_limits<int>::max();
 class LittleNew {
 public:
     // Algorytm Little'a do rozwiązania problemu komiwojażera
-    int algorithm(int** costMatrix, int size);
+    int* algorithm(int** costMatrix, int size);
 
 private:
     struct Node {

@@ -35,10 +35,9 @@ void App::run() {
 
 void App::runAlgorithms() {
     menu.algorithmsMenu();
-    int *result = new int[model.n];
+    int *result = new int[model.n + 1];
     int bruteShortestPath;
     int littleShortestPath;
-    Little::path *littleResult = new Little::path[model.n];
 
 
     switch (menu.algorithmChoice) {
@@ -49,7 +48,10 @@ void App::runAlgorithms() {
             cout << "Shortest path: " << bruteShortestPath << endl;
             break;
         case '2':
-            little.algorithm(model.matrix,model.n);
+            result = little.algorithm(model.matrix,model.n);
+            bruteForce.displayRoute(model.matrix, result, model.n);
+            littleShortestPath = bruteForce.countRoute(model.matrix, result, model.n);
+            cout << "Shortest path: " << littleShortestPath << endl;
             break;
         default:
             break;

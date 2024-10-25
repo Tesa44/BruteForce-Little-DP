@@ -11,15 +11,10 @@ class Menu {
 public:
     char mainChoice;
     char algorithmChoice;
-    char displayChoice;
     char exitConfirmChoice;
-    char speedTestChoice;
     void mainMenu();
     void algorithmsMenu();
-    void speedTestMenu();
     int inputLen();
-    int inputStart(int v);
-    int inputNumberOfTests();
     int n;
     bool checkChoices(char choice, char choiceQuantity);
     string inputPath();

@@ -120,7 +120,7 @@ LittleNew::Node LittleNew::createNode(int** parentMatrix, int level, int i, int 
 }
 
 // Algorytm Little'a do rozwiązania problemu komiwojażera
-int LittleNew::algorithm(int **costMatrix, int size) {
+int* LittleNew::algorithm(int **costMatrix, int size) {
     // Tworzymy kopię oryginalnej macierzy, aby jej nie modyfikować
     int** matrix = copyMatrix(costMatrix, size);
 
@@ -172,11 +172,14 @@ int LittleNew::algorithm(int **costMatrix, int size) {
     // Zwalniamy pamięć dla kopii macierzy
     deleteMatrix(matrix, size);
 
-    std::cout << "Najkrótsza trasa: ";
+    int * bestPathArr = new int[size + 1];
+    int i = 0;
+//    std::cout << "Najkrótsza trasa: ";
     for (int v : bestNode.path) {
-        std::cout << v << " ";
+        //std::cout << v << " ";
+        bestPathArr[i++] = v;
     }
-    std::cout << "\nMinimalny koszt: " << minCost << std::endl;
+//    std::cout << "\nMinimalny koszt: " << minCost << std::endl;
 
-    return minCost;
+    return bestPathArr;
 }

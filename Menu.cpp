@@ -19,17 +19,6 @@ void Menu::mainMenu() {
             return;
     }
 }
-void Menu::speedTestMenu() {
-    while (true) {
-        cout << "Witaj w trybie testowania szybkosci algorytmow" << endl;
-        cout << "Wybierz reprezentacje grafu do testowania" << endl;
-        cout << "1. Macierz incydencji" << endl;
-        cout << "2. Lista sasiedztwa" << endl;
-        cin >> speedTestChoice;
-        if (checkChoices(speedTestChoice, '2'))
-            return;
-    }
-}
 
 string Menu::inputPath() {
     string path;
@@ -81,52 +70,11 @@ void Menu::exitConfirmMenu() {
 }
 
 void Menu::algorithmsMenu() {
-    while (true) {
-        cout << "Wybierz algorytm dla ostatnio utworzonej lub wczytanej macierzy" << endl;
-        cout << "1. Algorytm Brute Force" << endl;
-        cout << "2. Algorytm Little'a" << endl;
-        cout << "3. Algorytm Programowanie Dynamiczne" << endl;
-        cin >> algorithmChoice;
-        if (checkChoices(algorithmChoice, '3'))
-            return;
-    }
+    cout << "Wybierz algorytm do problemu TSP" << endl;
+    cout << "1. Algorytm Brute Force" << endl;
+    cout << "2. Algorytm Little'a" << endl;
+    cin >> algorithmChoice;
+    if (checkChoices(algorithmChoice, '2')) return;
 }
 
-int Menu::inputStart(int v) {
-    string input;
-    bool guard;
-    while (true) {
-        guard = true;
-        cout << "Podaj wierzcholek startowy" << endl;
-        cin >> input;
-        for (int i = 0; i < input.length(); i++) {
-            if (isdigit(input[i] == false))
-                guard = false;
-        }
-        if (guard) {
-            int n = stoi(input);
-            if (n >= v) return 0;
-            return n;
-        }
-        cout << "To nie jest liczba" << endl;
-    }
-}
 
-int Menu::inputNumberOfTests() {
-    string input;
-    bool guard;
-    while (true) {
-        guard = true;
-        cout << "Podaj liczbe testow, z ktorych zostanie obliczony sredni czas wybranego sortowania" << endl;
-        cin >> input;
-        for (int i = 0; i < input.length(); i++) {
-            if (isdigit(input[i] == false))     //Sprawdzanie czy każdy podany znak jest liczbą
-                guard = false;
-        }
-        if (guard) {
-            int numberOfTests = stoi(input);    //Konwertowanie string na int
-            return numberOfTests;
-        }
-        cout << "To nie jest liczba" << endl;
-    }
-}
