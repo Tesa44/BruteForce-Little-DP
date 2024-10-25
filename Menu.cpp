@@ -82,13 +82,12 @@ void Menu::exitConfirmMenu() {
 
 void Menu::algorithmsMenu() {
     while (true) {
-        cout << "Wybierz algorytm dla ostatnio utworzonego lub wczytanego grafu" << endl;
-        cout << "1. Algorytm Prime" << endl;
-        cout << "2. Algorytm Kruskala" << endl;
-        cout << "3. Algorytm Dijkstry" << endl;
-        cout << "4. Algorytm Bellmana-Forda" << endl;
+        cout << "Wybierz algorytm dla ostatnio utworzonej lub wczytanej macierzy" << endl;
+        cout << "1. Algorytm Brute Force" << endl;
+        cout << "2. Algorytm Little'a" << endl;
+        cout << "3. Algorytm Programowanie Dynamiczne" << endl;
         cin >> algorithmChoice;
-        if (checkChoices(algorithmChoice, '4'))
+        if (checkChoices(algorithmChoice, '3'))
             return;
     }
 }

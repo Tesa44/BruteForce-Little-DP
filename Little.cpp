@@ -9,9 +9,10 @@
 #include <iostream>
 
 using namespace std;
-void Little::algorithm(int **matrix, int n) {
-    Helpers helpers;
-    //Macierz, która będzie redukowana
+Little::path* Little::algorithm(int **matrix, int n) {
+    path* finalPath = new path[n+1];
+    finalPath[n] = arrPathEnd;
+    //Macierz, która będzie redukowana (większy rozmiar, ponieważ dodajemy wiersz i kolumnę z numeracją)
     int **matrixToReduce = new int *[n + 1];
     for (int i = 0; i < n + 1; i++) {
         matrixToReduce[i] = new int[n + 1];
@@ -20,104 +21,49 @@ void Little::algorithm(int **matrix, int n) {
     //Dodajemy numery wierszy i kolumn
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            if (matrix[i][j] == 0) matrixToReduce[i + 1][j + 1] = 99;
+            if (matrix[i][j] == 0) matrixToReduce[i + 1][j + 1] = 99999;
             else matrixToReduce[i + 1][j + 1] = matrix[i][j];
 
         }
     }
+    //Numerujemy wiersze i kolumny
     for (int i = 0; i < n + 1; i++) {
         matrixToReduce[0][i] = i;
         matrixToReduce[i][0] = i;
     }
+    //Zmieniamy rozmiar macierzy, ponieważ dodaliśmy numerację
     n = n + 1;
 
-//    for (int i = 0; i< n; i++) {
-//        for (int j = 0; j < n; j++) {
-//            cout << matrixToReduce[i][j] << " ";
-//        }
-//        cout << endl;
-//    }
-//    cout << endl;
-    //Redukcja macierzy do C0
+    //Pierwsza redukcja macierzy do C0
     int w0 = reduceMatrix(matrixToReduce, n);
-
-//    for (int i = 0; i< n; i++) {
-//        for (int j = 0; j < n; j++) {
-//            cout << matrixToReduce[i][j] << " ";
-//        }
-//        cout << endl;
-//    }
-//    cout << "r: " << r << endl;
-//    cout << endl;
-//    int mp = countZeros(matrixToReduce, n);
-//    path* paths = new path[mp];
-//    //Szukanie optymalnych Kosztów wyłączeń
-//    paths = getMinPaths(matrixToReduce,n,mp);
-//    //displayArrPath(paths);
-//
-//    //Szukanie pierwszej ścieżki z największym kosztem wyłączeń
-//    path maxCostPath = findMaxCost(paths);
-//
-//    //Tworzenie macierzy C1 (usuwanie wiersza i kolumny)
-//
-//    int** c1 = deleteRowAndCol(matrixToReduce,n,maxCostPath.row,maxCostPath.column);
-//
-//    for (int i = 0; i< n-1; i++) {
-//        for (int j = 0; j < n-1; j++) {
-//            cout << c1[i][j] << " ";
-//        }
-//        cout << endl;
-//    }
-//    rec1(matrixToReduce, n, w0);
+    int i = 0;
+    //Kolejne redukcje  i zmniejszenia macierzy
     while (n > 1) {
+        //Liczymy, ile zer występuje w macierzy, aby wiedzieć jaki ustawić rozmiar listy ze ścieżkami
         int mp = countZeros(matrixToReduce, n);
+        //Szukamy odcinków (i-j), dla których Cij = 0 (koszt włączenia jest najmniejszy)
         path *paths = getMinPaths(matrixToReduce, n, mp);
-        //cout << "Sciezki: ";
-        //displayArrPath(paths);
-        //cout << endl;
+        //Do sprawdzania ścieżek
+//        cout << "Sciezki: ";
+//        displayArrPath(paths);
+//        cout << endl;
 
+        //Wybieramy ścieżkę, która ma największy koszt wyłączenia i dodajemy ją do wynikowej ścieżki
         path maxCostPath = findMaxCost(paths);
-        cout << maxCostPath.row << " -> " << maxCostPath.column << endl;
+        finalPath[i] = maxCostPath;
+        i++;
+        //cout << maxCostPath.row << " -> " << maxCostPath.column << endl;
+
+        //Z macierzy usuwamy i-ty wiersz i j-tą kolumnę na podstawie wybranego odcinka (i-j). Cji ustawiamy jako inf, aby zablokować drogę powrotną
         matrixToReduce = deleteRowAndCol(matrixToReduce, n, maxCostPath.row, maxCostPath.column);
-
+        //Zmniejszamy rozmiar macierzy, ponieważ usunęliśmy jeden wiersz i kolumnę
         n--;
+        //Redukujemy macierz, szukając najmniejszego elementu w każdym wierszu i kolumnie i odejmując go od wszytkich elementów w danym wierszu lub kolumnie
         w0 += reduceMatrix(matrixToReduce, n);
-//            for (int i = 0; i< n; i++) {
-//                for (int j = 0; j < n; j++) {
-//                    cout << matrixToReduce[i][j] << " ";
-//                }
-//                cout << endl;
-//            }
-//            cout << endl;
     }
-    cout << "total: " << w0 << endl;
+    //cout << "R = " << w0 << endl;  //Długość całej drogi
+    return finalPath;
 }
-
-
-
-
-
-
-int Little::rec1(int **matrix, int n, int kres_dolny) {
-    if (n == 1) {
-        int mp = countZeros(matrix, n);
-        path* paths = getMinPaths(matrix,n,mp);
-        path maxCostPath = findMaxCost(paths);
-        cout << maxCostPath.row << " -> " << maxCostPath.column << endl;
-        return 0;
-    }
-    else {
-        int mp = countZeros(matrix, n);
-        path *paths = getMinPaths(matrix, n, mp);
-        path maxCostPath = findMaxCost(paths);
-        int **c1 = deleteRowAndCol(matrix, n, maxCostPath.row, maxCostPath.column);
-        int r = reduceMatrix(matrix, n - 1);
-        return rec1(matrix, n - 1, kres_dolny + r);
-    }
-}
-
-
-
 
 int** Little::createMatrix(int n) {
     // Alokowanie pamięci dla wskaźnika do wierszy
@@ -130,14 +76,6 @@ int** Little::createMatrix(int n) {
     return matrix;
 }
 
-void Little::deleteMatrix(int** matrix, int n) {
-    for (int i = 0; i < n; ++i) {
-        delete[] matrix[i];
-    }
-    delete[] matrix;
-}
-
-
 int Little::findMin(int *arr, int n) {
    int min = arr[1];
    for (int i = 2 ; i < n ; i++) {
@@ -148,13 +86,11 @@ int Little::findMin(int *arr, int n) {
 
 Little::path Little::findMaxCost(Little::path *arrPath) {
         int maxCost = -1;
-        int maxCostId = -1;
         path maxCostPath;
         int i = 0;
         while(!pathIsEmpty(arrPath,i)) {
             if (arrPath[i].cost > maxCost) {
                 maxCost = arrPath[i].cost;
-                maxCostId = i;
                 maxCostPath = arrPath[i];
             }
             i++;
@@ -171,12 +107,11 @@ int Little::reduceMatrix(int **matrix, int n) {
         minRows[i] = findMin(matrix[i], n);
         r += minRows[i];
     }
-    //helpers.displayArray(minRows,n);
 
     //Odejmujemy minimalne wartości od każdego elementu w wierszu
     for (int i = 1; i< n; i++) {
         for (int j = 1; j < n; j++) {
-            if (matrix[i][j] != 99) matrix[i][j] = matrix[i][j] - minRows[i];
+            if (matrix[i][j] < 90000) matrix[i][j] = matrix[i][j] - minRows[i];
         }
     }
 
@@ -189,12 +124,11 @@ int Little::reduceMatrix(int **matrix, int n) {
         r += minCols[i];
         delete[] curCol;
     }
-    //helpers.displayArray(minCols,n);
 
     //Odejmujemy minimalne wartości od każdego elementu w kolumnie
     for (int i = 1; i < n; i++) {
         for (int j = 1; j < n; j++) {
-            if (matrix[j][i] != 99) matrix[j][i] = matrix[j][i] - minCols[i];
+            if (matrix[j][i] < 90000) matrix[j][i] = matrix[j][i] - minCols[i];
         }
     }
     delete[] minRows;
@@ -212,8 +146,8 @@ Little::path* Little::getMinPaths(int **matrix, int n, int mpSize) {
                 p.row = matrix[i][0];
                 p.column = matrix[0][j];
                 //Szukamy najmniejszego elementu w wierszu i w kolumnie nie licząc elementu ij
-                int minR = 99;
-                int minC = 99;
+                int minR = 99999;
+                int minC = 99999;
                 for (int r = 1; r < n ; r++) {
                     if (r != j && matrix[i][r] < minR)  minR = matrix[i][r];
                     if (r != i && matrix[r][j] < minC) minC = matrix[r][j];
@@ -252,7 +186,6 @@ void Little::displayArrPath(Little::path *arrPath) {
 }
 
 int** Little::deleteRowAndCol(int **matrix, int n, int rowToDelete, int colToDelete) {
-
     int** newMatrix = createMatrix(n-1);
     int rowIdToDelete = 0;
     int colIdToDelete = 0;
@@ -265,7 +198,6 @@ int** Little::deleteRowAndCol(int **matrix, int n, int rowToDelete, int colToDel
         colIdToDelete ++;
     };
 
-    //cout << "Id wiersza: " << rowIdToDelete << " Id kolumny: " << colIdToDelete << endl;
     //Przepisujemy wartości ze starej macierzy pomijając id wiersza i kolumny, którą należało usunąć
     int curRow = 0;
     int curCol = 0;
@@ -300,15 +232,34 @@ int** Little::deleteRowAndCol(int **matrix, int n, int rowToDelete, int colToDel
         }
     }
     //Jeżeli jest taki wiersz i kolumna to ustawiamy inf jako droga powrotna
-    if (checkRow and checkCol) newMatrix[curRow][curCol] = 99;
+    if (checkRow and checkCol) {
+        newMatrix[curCol][curRow] = 99999;
+    }
 
-
-//    for (int i = 0; i< n-1; i++) {
-//        for (int j = 0; j < n-1; j++) {
-//            cout << newMatrix[i][j] << " ";
-//        }
-//        cout << endl;
-//    }
-//    cout << endl;
     return newMatrix;
+}
+
+int* Little::convertPathToArr(Little::path *arrPath, int n) {
+    int *arr = new int[n+1];
+    // Znajdujemy pierwszy element ścieżki
+    int obecnyPoczatek = arrPath[0].row;
+    arr[0] = obecnyPoczatek;
+
+    // Zmienna do śledzenia aktualnego miejsca w wynikowej tablicy
+    int index = 1;
+
+    // Iterujemy przez odcinki, aż utworzymy całą ścieżkę
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (arrPath[j].row == obecnyPoczatek) {
+                // -1, ponieważ miasta były iterowane od 1 (na poczet algorytmu), a chcemy, żeby były od 0.
+                arr[index++] = arrPath[j].column-1;
+                obecnyPoczatek = arrPath[j].column-1;
+                break;
+            }
+        }
+    }
+    //Odcinek powrotny
+    arr[n] = arr[0];
+    return arr;
 }
