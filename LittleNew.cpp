@@ -15,7 +15,7 @@ int** LittleNew::createMatrix(int size) {
     for (int i = 0; i < size; ++i) {
         matrix[i] = new int[size];
         for (int j = 0; j < size; ++j) {
-            matrix[i][j] = INF; // Inicjalizowanie INF, jeśli chcemy domyślnie
+            matrix[i][j] = INF;
         }
     }
     return matrix;
@@ -39,12 +39,12 @@ int** LittleNew::copyMatrix(int** matrix, int size) {
     }
     return newMatrix;
 }
-
+//TODO raczej do wyjebania
 // Funkcja zamieniająca wszystkie 0 na INF w macierzy kosztów
 void LittleNew::replaceZeroesWithINF(int** matrix, int size) {
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
-            if (matrix[i][j] == 0 && i != j) { // Nie zamieniamy 0 na przekątnej (czyli z wierzchołka do samego siebie)
+            if (matrix[i][j] == 0) { // Nie zamieniamy 0 na przekątnej (czyli z wierzchołka do samego siebie)
                 matrix[i][j] = INF;
             }
         }
@@ -58,12 +58,14 @@ int LittleNew::reduceMatrix(int** matrix, int size) {
     // Redukcja wierszy
     for (int i = 0; i < size; ++i) {
         int minRow = INF;
+        //Szuakmy najmniejszego elementu w każdym wierszu
         for (int j = 0; j < size; ++j) {
             if (matrix[i][j] < minRow) {
                 minRow = matrix[i][j];
             }
         }
         if (minRow != INF && minRow != 0) {
+            //Dodajemy go do kosztu redukcji i odejmujemy od wszystkich elementów w danym wierszu
             reductionCost += minRow;
             for (int j = 0; j < size; ++j) {
                 if (matrix[i][j] != INF) {
@@ -76,12 +78,14 @@ int LittleNew::reduceMatrix(int** matrix, int size) {
     // Redukcja kolumn
     for (int j = 0; j < size; ++j) {
         int minCol = INF;
+        //Szukamy najmniejszego elementu w każdej kolumnie
         for (int i = 0; i < size; ++i) {
             if (matrix[i][j] < minCol) {
                 minCol = matrix[i][j];
             }
         }
         if (minCol != INF && minCol != 0) {
+            //Dodajemy go do kosztu redukcji i odejmujemy od wszystkich elementów w danej kolumnie
             reductionCost += minCol;
             for (int i = 0; i < size; ++i) {
                 if (matrix[i][j] != INF) {
@@ -103,7 +107,7 @@ LittleNew::Node LittleNew::createNode(int** parentMatrix, int level, int i, int 
     if (level != 0) {
         node.path.push_back(j);
     }
-
+    //TODO to jest chyba usuwanie wiersza i oraz kolumny j
     for (int k = 0; k < size; k++) {
         node.reducedMatrix[i][k] = INF;
         node.reducedMatrix[k][j] = INF;
@@ -127,9 +131,11 @@ int* LittleNew::algorithm(int **costMatrix, int size) {
     // Zamieniamy wszystkie 0 na INF, jeśli są poza przekątną
     replaceZeroesWithINF(matrix, size);
 
+    //Tworzenie kolejki priorytetowej
     std::priority_queue<Node, std::vector<Node>, std::greater<Node>> pq;
     std::vector<int> initialPath = {0};
 
+    //Tworzenie root'a grafu i pierwsza redukcja macierzy
     Node root;
     root.reducedMatrix = copyMatrix(matrix, size);
     root.cost = reduceMatrix(root.reducedMatrix, size);
@@ -143,6 +149,7 @@ int* LittleNew::algorithm(int **costMatrix, int size) {
     Node bestNode;
 
     while (!pq.empty()) {
+        //Pobieramy wierzchołek z kolejki
         Node current = pq.top();
         pq.pop();
 
@@ -150,10 +157,11 @@ int* LittleNew::algorithm(int **costMatrix, int size) {
             current.path.push_back(0);
             int totalCost = 0;
 
+            //Liczymy jaką długość do tej pory przeszliśmy
             for (int k = 0; k < current.path.size() - 1; ++k) {
                 totalCost += costMatrix[current.path[k]][current.path[k + 1]];
             }
-
+            //Jeżeli ta długość jest najmniejsza to mamy szansę na otrzymanie najkrótszej ścieżki
             if (totalCost < minCost) {
                 minCost = totalCost;
                 bestNode = current;
@@ -161,6 +169,7 @@ int* LittleNew::algorithm(int **costMatrix, int size) {
             continue;
         }
 
+        //TODO ogarnąć to
         for (int j = 0; j < size; j++) {
             if (current.reducedMatrix[current.vertex][j] != INF) {
                 Node child = createNode(current.reducedMatrix, current.level + 1, current.vertex, j, current.cost, current.path, size);
