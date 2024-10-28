@@ -24,7 +24,7 @@ private:
         int vertex;
         int level;
         std::vector<int> path;
-
+        //Operator porównania węzłów na podstawie wartości cost. Służy do porównywania węzłów wstawianych do kolejki priorytetowej
         bool operator>(const Node& other) const {
             return cost > other.cost;
         }

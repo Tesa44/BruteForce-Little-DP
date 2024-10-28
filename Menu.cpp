@@ -73,6 +73,7 @@ void Menu::algorithmsMenu() {
     cout << "Wybierz algorytm do problemu TSP" << endl;
     cout << "1. Algorytm Brute Force" << endl;
     cout << "2. Algorytm Little'a" << endl;
+    cout << "ttttt" << endl;
     cin >> algorithmChoice;
     if (checkChoices(algorithmChoice, '2')) return;
 }

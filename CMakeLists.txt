@@ -8,14 +8,14 @@ add_executable(PEA_projekt_1 main.cpp
         Menu.h
         MatrixModel.cpp
         MatrixModel.h
-        BruteForce.cpp
-        BruteForce.h
+        algorithms/BruteForce.cpp
+        algorithms/BruteForce.h
         Helpers.cpp
         Helpers.h
         App.cpp
         App.h
-        Little.cpp
-        Little.h
-        LittleNew.cpp
-        LittleNew.h
+        algorithms/Little.cpp
+        algorithms/Little.h
+        algorithms/LittleNew.cpp
+        algorithms/LittleNew.h
 )

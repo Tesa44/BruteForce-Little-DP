@@ -6,10 +6,10 @@
 #define APP_H
 #include "MatrixModel.h"
 #include "Menu.h"
-#include "Little.h"
-#include "BruteForce.h"
+#include "algorithms/Little.h"
+#include "algorithms/BruteForce.h"
 #include "Helpers.h"
-#include "LittleNew.h"
+#include "algorithms/LittleNew.h"
 
 
 class App {

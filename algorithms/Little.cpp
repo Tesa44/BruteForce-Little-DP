@@ -4,8 +4,8 @@
 
 #include <cstring>
 #include "Little.h"
-#include "MatrixModel.h"
-#include "Helpers.h"
+#include "../MatrixModel.h"
+#include "../Helpers.h"
 #include <iostream>
 
 using namespace std;
