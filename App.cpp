@@ -3,6 +3,7 @@
 //
 
 #include "App.h"
+#include <chrono>
 
 void App::run() {
     while (menu.exitConfirmChoice != '2') {
@@ -35,6 +36,12 @@ void App::run() {
 
 void App::runAlgorithms() {
     menu.algorithmsMenu();
+    //Zmienne do liczenia czasu
+    auto begin = std::chrono::steady_clock::now();
+    auto end = std::chrono::steady_clock::now();;
+    auto diff = duration_cast<std::chrono::nanoseconds>(begin - end); // Różnica czasu między begin i end
+    double durationTime;
+    //Zmienne do zapisywania wynikow
     int *result = new int[model.n + 1];
     int bruteShortestPath;
     int littleShortestPath;
@@ -42,16 +49,26 @@ void App::runAlgorithms() {
 
     switch (menu.algorithmChoice) {
         case '1':
+            begin = std::chrono::steady_clock::now();
             result = bruteForce.algorithm(model.matrix, model.n);
+            end = std::chrono::steady_clock::now();
+            diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+            durationTime = (double)diff.count() / 1000000;
             bruteForce.displayRoute(model.matrix, result, model.n);
             bruteShortestPath = bruteForce.countRoute(model.matrix, result, model.n);
-            cout << "Shortest path: " << bruteShortestPath << endl;
+            cout << "Najkrotsza sciezka: " << bruteShortestPath << endl;
+            cout << "Czas trwania: " << durationTime << "[ms]" << endl;
             break;
         case '2':
+            begin = std::chrono::steady_clock::now();
             result = little.algorithm(model.matrix,model.n);
+            end = std::chrono::steady_clock::now();
+            diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+            durationTime = (double)diff.count() / 1000000;
             bruteForce.displayRoute(model.matrix, result, model.n);
             littleShortestPath = bruteForce.countRoute(model.matrix, result, model.n);
-            cout << "Shortest path: " << littleShortestPath << endl;
+            cout << "Najkrotsza sciezka: " << littleShortestPath << endl;
+            cout << "Czas trwania: " << durationTime << "[ms]" << endl;
             break;
         default:
             break;

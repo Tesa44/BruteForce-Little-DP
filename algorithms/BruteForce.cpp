@@ -12,12 +12,15 @@ using namespace std;
 
 bool BruteForce::nextPermutation(int *elements, int n) {
     //Szukamy największego indeksu, dla którego elementy są ustawione rosnąco
+    //Szukamy od prawej strony, jeśli znajdziemy taki indeks, to możemy jeszcze otrzymać kolejną permutację
     int i = n - 2;
     while (i >= 0 && elements[i] >= elements[i+1]) i--;
 
-    //Jeśli nie ma takiego indeksu, to znaczy, że koniec permutacji
+    //Jeśli nie ma takiego indeksu, to znaczy, że nie ma już większej permutacji i wszystkie elementy są ustawione malejąco
     if (i < 0) return false;
-    //Szukamy największego indeksu od prawej strony, który wskaże nam największy element w nieposortowanej częsci tabeli !!!!!!!ZMIENIC!!!!!!
+
+    //Szukamy największego indeksu od prawej strony, który wskaże nam największy element w nieposortowanej częsci tabeli
+    //Dzięki temu zamienimy go z elements[i] (który jest ostatnim elementem w posortowanej części) i powstanie nam minimalnie większa permutacja
     int j = n -1;
     while (elements[j] <= elements[i]) j--;
 
@@ -25,6 +28,7 @@ bool BruteForce::nextPermutation(int *elements, int n) {
     swap(elements[i],elements[j]);
 
     //Odwracamy elementy od elements[i + 1] do końca
+    //Sprawi to, że część tablicy po i stanie się najmniejszą możliwą permutacją i cała tablica będzie najmniejszą kolejną permutacją
     int left = i + 1;
     int right = n - 1;
     while (left < right) {
@@ -32,6 +36,7 @@ bool BruteForce::nextPermutation(int *elements, int n) {
         left++;
         right--;
     }
+    //Zwracamy true, bo znaleźliśmy kolejną permutację
     return true;
 }
 
