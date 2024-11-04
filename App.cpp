@@ -45,7 +45,7 @@ void App::runAlgorithms() {
     int *result = new int[model.n + 1];
     int bruteShortestPath;
     int littleShortestPath;
-
+    int dynamicShortestPath;
 
     switch (menu.algorithmChoice) {
         case '1':
@@ -70,7 +70,19 @@ void App::runAlgorithms() {
             cout << "Najkrotsza sciezka: " << littleShortestPath << endl;
             cout << "Czas trwania: " << durationTime << "[ms]" << endl;
             break;
+        case '3':
+            begin = std::chrono::steady_clock::now();
+            result = dynamicProg.algorithmPath(model.matrix, model.n);
+            end = std::chrono::steady_clock::now();
+            diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+            durationTime = (double)diff.count() / 1000000;
+            bruteForce.displayRoute(model.matrix, result, model.n);
+            dynamicShortestPath = bruteForce.countRoute(model.matrix, result, model.n);
+            cout << "Najkrotsza sciezka: " << dynamicShortestPath << endl;
+            cout << "Czas trwania: " << durationTime << "[ms]" << endl;
+            break;
         default:
             break;
     }
+    delete[] result;
 }

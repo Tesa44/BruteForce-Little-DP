@@ -9,6 +9,7 @@
 #include "algorithms/Little.h"
 #include "algorithms/BruteForce.h"
 #include "Helpers.h"
+#include "algorithms/DynamicProg.h"
 #include "algorithms/LittleNew.h"
 
 
@@ -20,6 +21,7 @@ public:
     MatrixModel model;
     BruteForce bruteForce;
     LittleNew little;
+    DynamicProg dynamicProg;
     Helpers helpers;
     void runAlgorithms();
 };
