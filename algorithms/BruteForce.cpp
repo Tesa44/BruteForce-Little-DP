@@ -46,9 +46,10 @@ int* BruteForce::algorithm(int **matrix, int n) {
     int nextCity;
     int startCity;
     int *minRoute = new int[n+1];
-    int *cities = new int[n];
-    for (int i = 0; i < n; i++) {
-        cities[i] = i;
+    int *cities = new int[n-1];
+
+    for (int i = 1; i < n; i++) {
+        cities[i-1] = i;
     }
     //Pierwsza permutacja
     int curPath = 0;
@@ -63,21 +64,22 @@ int* BruteForce::algorithm(int **matrix, int n) {
     }
     minPath = curPath;
     //Generowanie kolejnych permutacji
-    while (nextPermutation(cities, n)) {
+    while (nextPermutation(cities, n-1)) {
         int *curRoute = new int[n + 1]; //Tablica przechowująca bieżącą drogę
-        curPath = 0;
-        for (int i = 0; i < n - 1; i ++) {
+        curPath  = matrix[0][cities[0]];    //Droga z miasta początkowego ( 0 ) do pierwszego miasta z permutacji
+        curRoute[0] = 0;
+        for (int i = 0; i < n - 1 - 1; i ++) {
             curCity = cities[i];
             nextCity = cities[i + 1];
-            curRoute[i] = curCity;
+            curRoute[i+1] = curCity;
             curPath += matrix[curCity][nextCity];
         }
         //Dopisanie ostatniego miasta
         curRoute[n-1] = nextCity;
 
-        //Droga z ostatniego miasta do miasta startowego
-        startCity = cities[0];
-        curCity = cities[n-1];
+        //Droga z ostatniego miasta do miasta startowego ( 0 )
+        startCity = 0;
+        curCity = cities[n - 1 - 1];
         curPath += matrix[curCity][startCity];
         curRoute[n] = startCity;
         //Sprawdzanie, czy bieżąca droga może być drogą najkrótszą i ewentualne jej zapamiętanie
