@@ -23,7 +23,11 @@ public:
     LittleNew little;
     DynamicProg dynamicProg;
     Helpers helpers;
+
+    double durationTime = 0;
+    int numberOfTests = 0;
     void runAlgorithms();
+    void runTests();
 };
 
 

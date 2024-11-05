@@ -16,17 +16,19 @@ void App::run() {
                 break;
             case '2':
                 cout << "Generowanie macierzy ..." << endl;
+                model.freeMatrix();
                 model.generateMatrix(menu.inputLen());
                 model.displayMatrix();
                 runAlgorithms();
                 break;
             case '3':
+                model.freeMatrix();
                 model.loadMatrixFromFile(menu.inputPath());
                 cout << "Twoja macierz to: " << endl;
                 model.displayMatrix();
                 runAlgorithms();
             case '4':
-                //TODO consider this option
+                runTests();
             default:
                 break;
         }
@@ -85,4 +87,44 @@ void App::runAlgorithms() {
             break;
     }
     delete[] result;
+}
+
+void App::runTests()
+{
+    menu.algorithmsMenu();  //Wybierz algorytm do testowania
+    numberOfTests = menu.inputNumberOfTests();
+    auto begin = std::chrono::steady_clock::now();
+    auto end = std::chrono::steady_clock::now();
+    auto diff = duration_cast<chrono::nanoseconds>(end - begin);
+    int numbersOfCities[10] = {4,6,8,10,12,15,20,22,25,27};
+    double *results = new double[10];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
+
+    srand(time(NULL));
+    for (int i = 0; i <10; i++)
+    {
+        model.n = numbersOfCities[i];
+        double totalDurTime = 0;
+        double avgDurTime = 0;
+        for (int j = 0; j < numberOfTests; j++)
+        {
+            model.generateMatrix(model.n);
+
+            switch (menu.algorithmChoice)
+            {
+            case '1':
+                //TODO add BruteForce
+                    break;
+
+            case '2':
+                //TODO add Little
+                    break;
+            case '3':
+                //TODO add Dynamic Programming
+                break;
+                default:
+                    //TODO add err message
+            }
+        }
+        //TODO add counting avg and display summmary
+    }
 }

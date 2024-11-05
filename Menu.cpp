@@ -78,4 +78,23 @@ void Menu::algorithmsMenu() {
     if (checkChoices(algorithmChoice, '3')) return;
 }
 
+int Menu::inputNumberOfTests() {
+    string input;
+    bool guard;
+    while (true) {
+        guard = true;
+        cout << "Podaj liczbe testow, z ktorych zostanie obliczony sredni czas wybranego sortowania" << endl;
+        cin >> input;
+        for (int i = 0; i < input.length(); i++) {
+            if (isdigit(input[i] == false))     //Sprawdzanie czy każdy podany znak jest liczbą
+                guard = false;
+        }
+        if (guard) {
+            int numberOfTests = stoi(input);    //Konwertowanie string na int
+            return numberOfTests;
+        }
+        cout << "To nie jest liczba" << endl;
+    }
+}
+
 

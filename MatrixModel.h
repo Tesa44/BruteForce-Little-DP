@@ -11,7 +11,7 @@ private:
     void initMatrix();  //Utworzenie macierzy o rozmiarze n wypełnionej zerami
 public:
     int **matrix;
-    int n; //Rozmiar macierzy
+    int n = 0; //Rozmiar macierzy
     void freeMatrix();
     void displayMatrix();
     void loadMatrixFromFile(std::string path);
