@@ -96,15 +96,15 @@ void App::runTests()
     auto begin = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
     auto diff = duration_cast<chrono::nanoseconds>(end - begin);
-    int numbersOfCities[10] = {4,6,8,10,12,15,20,22,25,27};
-    double *results = new double[10];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
-
+    int numbersOfCities[7] = {4,6,8,10,12,14,15};
+    double *avgResults = new double[7];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
+    string name = "";
     srand(time(NULL));
-    for (int i = 0; i <10; i++)
-    {
+    for (int i = 0; i <7; i++) {
         model.n = numbersOfCities[i];
         double totalDurTime = 0;
         double avgDurTime = 0;
+        int* result = new int[model.n + 1];
         for (int j = 0; j < numberOfTests; j++)
         {
             model.generateMatrix(model.n);
@@ -112,19 +112,46 @@ void App::runTests()
             switch (menu.algorithmChoice)
             {
             case '1':
-                //TODO add BruteForce
-                    break;
+                name = "Brute Force";
+                begin = std::chrono::steady_clock::now();
+                result = bruteForce.algorithm(model.matrix, model.n);
+                end = std::chrono::steady_clock::now();
+                diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+                totalDurTime += (double)diff.count() / 1000000;
+                break;
 
             case '2':
-                //TODO add Little
+                name = "Little'a";
+                begin = std::chrono::steady_clock::now();
+                result = little.algorithm(model.matrix, model.n);
+                end = std::chrono::steady_clock::now();
+                diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+                totalDurTime += (double)diff.count() / 1000000;
                     break;
             case '3':
-                //TODO add Dynamic Programming
+                name = "Dynamic Programming";
+                begin = std::chrono::steady_clock::now();
+                //TODO fix return value from dynamic programming algorithm
+                //result = dynamicProg.algorithm(model.matrix, model.n);
+                end = std::chrono::steady_clock::now();
+                diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+                totalDurTime += (double)diff.count() / 1000000;
                 break;
-                default:
-                    //TODO add err message
-            }
-        }
-        //TODO add counting avg and display summmary
+            };
+
+        cout << "Test" << j << "wykonany ";
+        cout << " w czasie  " << (double)diff.count() / 1000000 << "[ms]" << endl;    //Informacja o czasie algorytmu dla danego testu
+        model.freeMatrix();   //Zwolnij pamięć dynamicznej macierzy
+            delete[] result; //Zwolnij pamięć wyniku algorytmu
     }
+    avgDurTime = totalDurTime / numberOfTests;  //Obliczanie średniej z czasów algorytmu wszytkich testow dla danej ilości miast
+    cout << "Ilosc miast: " << model.n << endl;
+    cout <<  "Sredni czas algorytmu " << name <<" to: " <<avgDurTime << " [ms]" << endl << endl;
+    avgResults[i] = avgDurTime;
+    }
+    cout << "------- Podsumowanie -------" << endl;
+    for (int i = 0; i < 7; i ++){
+        cout << "Sredni czas algorytmu dla " << numbersOfCities[i] << " miast to " << avgResults[i] << " [ms]" << endl;
+    }
+    cout << endl;
 }
