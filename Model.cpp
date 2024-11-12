@@ -2,18 +2,19 @@
 // Created by Mateusz on 10.10.2024.
 //
 
-#include "MatrixModel.h"
+#include "Model.h"
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
+#include "Config.h";
 
 using namespace std;
 
 //Funkcja tworząca dynamiczną macierz
 //Wymagane jest wcześniejsze załadowanie rozmiaru macierzy do globalnej zmiennej n
 //Macierz jest tworzona jako dynamiczna tablica, do której dodaje się n tablic dynamicznych
-void MatrixModel::initMatrix() {
+void Model::initMatrix() {
     matrix = new int*[n];
     for (int i = 0; i < n; i++){
         matrix[i] = new int[n];
@@ -28,7 +29,7 @@ void MatrixModel::initMatrix() {
 }
 
 
-void MatrixModel::loadMatrixFromFile(std::string path) {
+void Model::loadMatrixFromFile(std::string path) {
     fstream file;
     file.open(path, ios_base::in);
     file >> n; //Zczytanie pierwszej linii jako rozmiar macierzy
@@ -44,23 +45,13 @@ void MatrixModel::loadMatrixFromFile(std::string path) {
     }
 }
 
-void MatrixModel::displayMatrix() {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++){
-            printf("%-4d",matrix[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-void MatrixModel::generateMatrix(int matrixSize) {
+void Model::generateMatrix(int matrixSize) {
     //Ustawienie globalnego rozmiaru macierzy
     n = matrixSize;
-
     initMatrix();
-    //TODO init CONFIG class and add maxPath, minPath
-    int maxPath = 15;
-    int minPath = 1;
+
+    int maxPath = config.maxGeneratedPath;
+    int minPath = config.minGeneratedPath;
     int path;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -73,7 +64,7 @@ void MatrixModel::generateMatrix(int matrixSize) {
     }
 }
 
-void MatrixModel::freeMatrix() {
+void Model::freeMatrix() {
     for (int i = 0; i < n; ++i)
         delete [] matrix[i];
     delete [] matrix;

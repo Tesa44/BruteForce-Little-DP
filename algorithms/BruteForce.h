@@ -9,8 +9,6 @@
 class BruteForce {
 public:
         int* algorithm(int **matrix, int n);
-        void displayRoute(int **matrix,int *route, int n);
-        int countRoute(int **matrix, int *routeArr, int n);
 private:
         bool nextPermutation(int *elements, int n);
 

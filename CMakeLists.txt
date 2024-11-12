@@ -6,18 +6,17 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(PEA_projekt_1 main.cpp
         Menu.cpp
         Menu.h
-        MatrixModel.cpp
-        MatrixModel.h
+        Model.cpp
+        Model.h
         algorithms/BruteForce.cpp
         algorithms/BruteForce.h
         Helpers.cpp
         Helpers.h
         App.cpp
         App.h
-        algorithms/Little.cpp
-        algorithms/Little.h
         algorithms/LittleNew.cpp
         algorithms/LittleNew.h
         algorithms/DynamicProg.cpp
         algorithms/DynamicProg.h
+        Config.h
 )

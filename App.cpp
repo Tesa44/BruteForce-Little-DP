@@ -6,30 +6,38 @@
 #include <chrono>
 
 void App::run() {
+    bool isMatrix = false;
     while (menu.exitConfirmChoice != '2') {
         menu.mainMenu();
         switch (menu.mainChoice) {
             case '1':
-                cout << "Twoja macierz to: " << endl;
-                model.displayMatrix();
-                runAlgorithms();
+                if (isMatrix)
+                {
+                    cout << "Twoja macierz to: " << endl;
+                    helpers.displayMatrix(model.matrix,model.n);
+                    runAlgorithms();
+                } else {cout << "Nie masz zadnej zapisanej macierzy!" << endl;}
                 break;
             case '2':
+                if (isMatrix) model.freeMatrix();
                 cout << "Generowanie macierzy ..." << endl;
-                model.freeMatrix();
+                isMatrix = true;
                 model.generateMatrix(menu.inputLen());
-                model.displayMatrix();
+                helpers.displayMatrix(model.matrix,model.n);
                 runAlgorithms();
                 break;
             case '3':
-                model.freeMatrix();
+                if (isMatrix) model.freeMatrix();
                 model.loadMatrixFromFile(menu.inputPath());
                 cout << "Twoja macierz to: " << endl;
-                model.displayMatrix();
+                helpers.displayMatrix(model.matrix,model.n);
                 runAlgorithms();
+                break;
             case '4':
                 runTests();
+                break;
             default:
+                cout << "Niepoprawny wybór" << endl;
                 break;
         }
         menu.exitConfirmMenu();
@@ -41,7 +49,7 @@ void App::runAlgorithms() {
     //Zmienne do liczenia czasu
     auto begin = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();;
-    auto diff = duration_cast<std::chrono::nanoseconds>(begin - end); // Różnica czasu między begin i end
+    auto diff = duration_cast<std::chrono::nanoseconds>(end - begin); // Różnica czasu między begin i end
     double durationTime;
     //Zmienne do zapisywania wynikow
     int *result = new int[model.n + 1];
@@ -56,8 +64,8 @@ void App::runAlgorithms() {
             end = std::chrono::steady_clock::now();
             diff = duration_cast<std::chrono::nanoseconds>(end - begin);
             durationTime = (double)diff.count() / 1000000;
-            bruteForce.displayRoute(model.matrix, result, model.n);
-            bruteShortestPath = bruteForce.countRoute(model.matrix, result, model.n);
+            helpers.displayRoute(model.matrix, result, model.n);
+            bruteShortestPath = helpers.countRoute(model.matrix, result, model.n);
             cout << "Najkrotsza sciezka: " << bruteShortestPath << endl;
             cout << "Czas trwania: " << durationTime << "[ms]" << endl;
             break;
@@ -67,19 +75,19 @@ void App::runAlgorithms() {
             end = std::chrono::steady_clock::now();
             diff = duration_cast<std::chrono::nanoseconds>(end - begin);
             durationTime = (double)diff.count() / 1000000;
-            bruteForce.displayRoute(model.matrix, result, model.n);
-            littleShortestPath = bruteForce.countRoute(model.matrix, result, model.n);
+            helpers.displayRoute(model.matrix, result, model.n);
+            littleShortestPath = helpers.countRoute(model.matrix, result, model.n);
             cout << "Najkrotsza sciezka: " << littleShortestPath << endl;
             cout << "Czas trwania: " << durationTime << "[ms]" << endl;
             break;
         case '3':
             begin = std::chrono::steady_clock::now();
-            result = dynamicProg.algorithmPath(model.matrix, model.n);
+            result = dynamicProg.algorithm(model.matrix, model.n);
             end = std::chrono::steady_clock::now();
             diff = duration_cast<std::chrono::nanoseconds>(end - begin);
             durationTime = (double)diff.count() / 1000000;
-            bruteForce.displayRoute(model.matrix, result, model.n);
-            dynamicShortestPath = bruteForce.countRoute(model.matrix, result, model.n);
+            helpers.displayRoute(model.matrix, result, model.n);
+            dynamicShortestPath = helpers.countRoute(model.matrix, result, model.n);
             cout << "Najkrotsza sciezka: " << dynamicShortestPath << endl;
             cout << "Czas trwania: " << durationTime << "[ms]" << endl;
             break;
@@ -96,12 +104,12 @@ void App::runTests()
     auto begin = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
     auto diff = duration_cast<chrono::nanoseconds>(end - begin);
-    int numbersOfCities[7] = {4,6,8,10,12,14,15};
-    double *avgResults = new double[7];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
+    //int numbersOfCities[7] = {4,6,8,10,12,14,15};
+    double *avgResults = new double[config.arrLen];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
     string name = "";
     srand(time(NULL));
-    for (int i = 0; i <7; i++) {
-        model.n = numbersOfCities[i];
+    for (int i = 0; i <config.arrLen; i++) {
+        model.n = config.numberOfCities[i];
         double totalDurTime = 0;
         double avgDurTime = 0;
         int* result = new int[model.n + 1];
@@ -131,8 +139,7 @@ void App::runTests()
             case '3':
                 name = "Dynamic Programming";
                 begin = std::chrono::steady_clock::now();
-                //TODO fix return value from dynamic programming algorithm
-                //result = dynamicProg.algorithm(model.matrix, model.n);
+                result = dynamicProg.algorithm(model.matrix, model.n);
                 end = std::chrono::steady_clock::now();
                 diff = duration_cast<std::chrono::nanoseconds>(end - begin);
                 totalDurTime += (double)diff.count() / 1000000;
@@ -150,8 +157,8 @@ void App::runTests()
     avgResults[i] = avgDurTime;
     }
     cout << "------- Podsumowanie -------" << endl;
-    for (int i = 0; i < 7; i ++){
-        cout << "Sredni czas algorytmu dla " << numbersOfCities[i] << " miast to " << avgResults[i] << " [ms]" << endl;
+    for (int i = 0; i < config.arrLen; i ++){
+        cout << "Sredni czas algorytmu dla " << config.numberOfCities[i] << " miast to " << avgResults[i] << " [ms]" << endl;
     }
     cout << endl;
 }

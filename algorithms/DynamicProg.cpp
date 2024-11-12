@@ -12,9 +12,8 @@
 #include "DynamicProg.h"
 #include <cmath>
 #include <cstdio>
-#include <limits.h>
 
-int DynamicProg::algorithm(int** matrix, int n)
+int* DynamicProg::algorithm(int** matrix, int n)
 {
     createTSPMatrix(n);
     createMemoMatrix(pow(2,n), n);
@@ -27,27 +26,6 @@ int DynamicProg::algorithm(int** matrix, int n)
             TSPmatrix[i][j] = matrix[i][j];
         }
     }
-
-
-    int result = TSP(1,0);
-
-    return result;
-}
-
-int* DynamicProg::algorithmPath(int** matrix, int n)
-{
-    createTSPMatrix(n);
-    createMemoMatrix(pow(2,n), n);
-    createPathMatrix(pow(2,n), n);
-    size = n;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            TSPmatrix[i][j] = matrix[i][j];
-        }
-    }
-
 
     int result = TSP(1,0);
 

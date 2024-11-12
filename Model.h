@@ -6,14 +6,16 @@
 #define PEA_PROJEKT_1_MATRIXMODEL_H
 #include <string>
 
-class MatrixModel {
+#include "Config.h"
+
+class Model {
 private:
+    Config config;
     void initMatrix();  //Utworzenie macierzy o rozmiarze n wypełnionej zerami
 public:
     int **matrix;
     int n = 0; //Rozmiar macierzy
     void freeMatrix();
-    void displayMatrix();
     void loadMatrixFromFile(std::string path);
     void generateMatrix(int matrixSize);
 

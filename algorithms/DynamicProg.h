@@ -8,8 +8,7 @@
 
 class DynamicProg {
 public:
-    int algorithm(int** matrix, int n);
-    int* algorithmPath(int** matrix, int n);
+    int* algorithm(int** matrix, int n);
     void printPath(int mark, int position);
 private:
     int TSP(int mark, int position);
