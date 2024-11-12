@@ -53,9 +53,9 @@ void App::runAlgorithms() {
     double durationTime;
     //Zmienne do zapisywania wynikow
     int *result = new int[model.n + 1];
-    int bruteShortestPath;
-    int littleShortestPath;
-    int dynamicShortestPath;
+    int bruteShortestPath = 0;
+    int littleShortestPath = 0;
+    int dynamicShortestPath = 0;
 
     switch (menu.algorithmChoice) {
         case '1':

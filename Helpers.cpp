@@ -26,18 +26,13 @@ void Helpers::displayMatrix(int **matrix, int n) {
 int Helpers::countRoute(int **matrix, int *routeArr, int n) {
     int route = 0;
     int routeLen = n + 1;
-    int curCity, nextCity,lastCity,firstCity;
+    int curCity, nextCity;
     for (int i = 0; i < routeLen - 1; i++) {
         curCity = routeArr[i];
         nextCity = routeArr[i+1];
         route += matrix[curCity][nextCity];
     }
-    //Droga z ostatniego do pierwszego miasta
-    lastCity = routeArr[routeLen-1];
-    firstCity = routeArr[0];
-    route += matrix[lastCity][firstCity];
     return route;
-
 }
 
 
