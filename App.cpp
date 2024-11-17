@@ -104,7 +104,6 @@ void App::runTests()
     auto begin = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
     auto diff = duration_cast<chrono::nanoseconds>(end - begin);
-    //int numbersOfCities[7] = {4,6,8,10,12,14,15};
     double *avgResults = new double[config.arrLen];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
     string name = "";
     srand(time(NULL));

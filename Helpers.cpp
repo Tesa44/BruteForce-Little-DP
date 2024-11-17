@@ -3,6 +3,8 @@
 //
 
 #include "Helpers.h"
+
+#include "algorithms/Little.h"
 using namespace std;
 #include <iostream>
 
@@ -17,7 +19,11 @@ void Helpers::displayArray(int *arr,int n) {
 void Helpers::displayMatrix(int **matrix, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++){
-            printf("%-4d",matrix[i][j]);
+            if (matrix[i][j] == INF) {printf("%-4s","INF");}
+            else
+            {
+                printf("%-4d",matrix[i][j]);
+            }
         }
         printf("\n");
     }
@@ -39,11 +45,9 @@ int Helpers::countRoute(int **matrix, int *routeArr, int n) {
 void Helpers::displayRoute(int **matrix, int *route, int n) {
     int curCity, nextCity, lastCity;
     int routeLen = n + 1;
-    //cout << "routeLen: " << routeLen << endl;
     for (int i = 0; i < routeLen-1; i++) {
         curCity = route[i];
         nextCity = route[i+1];
-        //cout << curCity << "   " << nextCity << endl;
         printf("%d -(%d)-> ",curCity,matrix[curCity][nextCity]);
     }
     lastCity = route[routeLen-1];

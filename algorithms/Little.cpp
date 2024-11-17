@@ -2,15 +2,15 @@
 // Created by Mateusz on 25.10.2024.
 //
 
-#include "LittleNew.h"
+#include "Little.h"
 
-#include "LittleNew.h"
+#include "Little.h"
 #include <iostream>
 #include <vector>
 #include <queue>
 
 // Funkcja do dynamicznego alokowania macierzy 2D
-int** LittleNew::createMatrix(int size) {
+int** Little::createMatrix(int size) {
     int** matrix = new int*[size];
     for (int i = 0; i < size; ++i) {
         matrix[i] = new int[size];
@@ -22,7 +22,7 @@ int** LittleNew::createMatrix(int size) {
 }
 
 // Funkcja do zwalniania pamięci dynamicznej macierzy 2D
-void LittleNew::deleteMatrix(int** matrix, int size) {
+void Little::deleteMatrix(int** matrix, int size) {
     for (int i = 0; i < size; ++i) {
         delete[] matrix[i];
     }
@@ -30,7 +30,7 @@ void LittleNew::deleteMatrix(int** matrix, int size) {
 }
 
 // Funkcja do kopiowania macierzy 2D
-int** LittleNew::copyMatrix(int** matrix, int size) {
+int** Little::copyMatrix(int** matrix, int size) {
     int** newMatrix = createMatrix(size);
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
@@ -41,7 +41,7 @@ int** LittleNew::copyMatrix(int** matrix, int size) {
 }
 
 // Funkcja zamieniająca wszystkie 0 na INF w macierzy pierwotnej
-void LittleNew::replaceZeroesWithINF(int** matrix, int size) {
+void Little::replaceZeroesWithINF(int** matrix, int size) {
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             if (matrix[i][j] == 0 or matrix[i][j] == -1) {
@@ -52,7 +52,7 @@ void LittleNew::replaceZeroesWithINF(int** matrix, int size) {
 }
 
 // Funkcja do redukcji macierzy kosztów
-int LittleNew::reduceMatrix(int** matrix, int size) {
+int Little::reduceMatrix(int** matrix, int size) {
     int reductionCost = 0;
 
     // Redukcja wierszy
@@ -99,7 +99,7 @@ int LittleNew::reduceMatrix(int** matrix, int size) {
 }
 
 // Tworzenie nowego węzła w drzewie decyzyjnym.
-LittleNew::Node LittleNew::createNode(int** parentMatrix, int level, int i, int j, int parentCost, std::vector<int> path, int size) {
+Little::Node Little::createNode(int** parentMatrix, int level, int i, int j, int parentCost, std::vector<int> path, int size) {
     Node node;
     node.reducedMatrix = copyMatrix(parentMatrix, size);
     node.path = path;
@@ -127,7 +127,7 @@ LittleNew::Node LittleNew::createNode(int** parentMatrix, int level, int i, int 
 }
 
 // Algorytm Little'a do rozwiązania problemu komiwojażera
-int* LittleNew::algorithm(int **costMatrix, int size) {
+int* Little::algorithm(int **costMatrix, int size) {
     // Tworzymy kopię oryginalnej macierzy, aby jej nie modyfikować
     int** matrix = copyMatrix(costMatrix, size);
 
@@ -147,6 +147,10 @@ int* LittleNew::algorithm(int **costMatrix, int size) {
     root.level = 0;
     root.path = initialPath;
 
+    //Wyswietlanie
+    //std::cout << "pierwsza redukcja macierzy:" << std::endl;
+    //helpers.displayMatrix(root.reducedMatrix, size);
+    //std::cout <<"Koszt redukcji: " << root.cost <<std::endl << std::endl;
     //Umieszaczmy węzęł początkowy w kolejce
     pq.push(root);
 
@@ -159,26 +163,28 @@ int* LittleNew::algorithm(int **costMatrix, int size) {
         Node current = pq.top();
         pq.pop();
 
-//        std::cout << "Wierzcholek: " <<current.vertex << "koszt: " <<current.cost<< "Poziom: "<<current.level << std::endl;
-//        std::cout << "droga: ";
-//        for (int i = 0; i < current.path.size(); i++)
-//            std::cout << current.path[i] << " ";
-//        std::cout << std::endl;
+        //std::cout << "pobrano Wierzcholek: " <<current.vertex << "koszt: " <<current.cost<< "Poziom: "<<current.level << std::endl;
+        //std::cout << "droga: ";
+        // for (int i = 0; i < current.path.size(); i++)
+        //     std::cout << current.path[i] << " ";
+        // std::cout << std::endl;
 
         //Jeżeli osiągnęliśmy poziom N-1, to znaczy, że mamy pełną ścieżkę
         if (current.level == size - 1) {
             current.path.push_back(0);  //Dodajemy powrót
             int totalCost = 0;
-
+            //std::cout << "Znaleziono pelna sciezke" <<std::endl;
             //Liczymy jaką długość do tej pory przeszliśmy
             for (int k = 0; k < current.path.size() - 1; ++k) {
                 totalCost += costMatrix[current.path[k]][current.path[k + 1]];
             }
             //Jeżeli ta długość jest najmniejsza to mamy szansę na otrzymanie najkrótszej ścieżki
             if (totalCost < minCost) {
+                //std::cout << "Sciezka jest najmniejsza: " << totalCost<< std::endl;
                 minCost = totalCost;
                 bestNode = current;
             }
+            //else {std::cout << "Sciezka nie jest najmniejsza" << std::endl;}
             continue;
         }
 
@@ -186,9 +192,14 @@ int* LittleNew::algorithm(int **costMatrix, int size) {
         for (int j = 0; j < size; j++) {
             if (current.reducedMatrix[current.vertex][j] != INF) {
                 Node child = createNode(current.reducedMatrix, current.level + 1, current.vertex, j, current.cost, current.path, size);
+                // std::cout << "tworzenie dziecka: " << child.vertex << "koszt: " <<child.cost << std::endl;
+                // std::cout << "Macierz po usunieciu i redukcji: " << std::endl;
+                //helpers.displayMatrix(child.reducedMatrix, size);
                 if (child.cost < minCost) {
-                pq.push(child);
+                    //std::cout << "Dodano dziecko do kolejki: " << child.vertex  << "Rodzic: " << current.vertex<<" koszt: " << child.cost <<std::endl;
+                    pq.push(child);
                 }
+                //else { std::cout << "Nie dodano dziecka do kolejki" << std::endl; }
             }
         }
     }

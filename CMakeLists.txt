@@ -14,8 +14,8 @@ add_executable(PEA_projekt_1 main.cpp
         Helpers.h
         App.cpp
         App.h
-        algorithms/LittleNew.cpp
-        algorithms/LittleNew.h
+        algorithms/Little.cpp
+        algorithms/Little.h
         algorithms/DynamicProg.cpp
         algorithms/DynamicProg.h
         Config.h

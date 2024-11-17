@@ -15,12 +15,11 @@
 class App {
     public:
         void run();
-
     private:
         Menu menu;
         Model model;
         BruteForce bruteForce;
-        LittleNew little;
+        Little little;
         DynamicProg dynamicProg;
         Helpers helpers;
         Config config;

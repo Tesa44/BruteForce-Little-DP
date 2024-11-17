@@ -9,10 +9,10 @@
 #include <vector>
 #include <limits>
 #include <queue>
-
+#include "../Helpers.h"
 const int INF = std::numeric_limits<int>::max();
 
-class LittleNew {
+class Little {
 public:
     // Algorytm Little'a do rozwiązania problemu komiwojażera
     int* algorithm(int** costMatrix, int size);
@@ -29,7 +29,7 @@ private:
             return cost > other.cost;
         }
     };
-
+    Helpers helpers;
     // Metody pomocnicze
     int** createMatrix(int size);
     void deleteMatrix(int** matrix, int size);
