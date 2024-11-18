@@ -49,7 +49,7 @@ void App::runAlgorithms() {
     //Zmienne do liczenia czasu
     auto begin = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();;
-    auto diff = duration_cast<std::chrono::nanoseconds>(end - begin); // Różnica czasu między begin i end
+    auto diff = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin); // Różnica czasu między begin i end
     double durationTime;
     //Zmienne do zapisywania wynikow
     int *result = new int[model.n + 1];
@@ -62,7 +62,7 @@ void App::runAlgorithms() {
             begin = std::chrono::steady_clock::now();
             result = bruteForce.algorithm(model.matrix, model.n);
             end = std::chrono::steady_clock::now();
-            diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+            diff = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
             durationTime = (double)diff.count() / 1000000;
             helpers.displayRoute(model.matrix, result, model.n);
             bruteShortestPath = helpers.countRoute(model.matrix, result, model.n);
@@ -73,7 +73,7 @@ void App::runAlgorithms() {
             begin = std::chrono::steady_clock::now();
             result = little.algorithm(model.matrix,model.n);
             end = std::chrono::steady_clock::now();
-            diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+            diff = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
             durationTime = (double)diff.count() / 1000000;
             helpers.displayRoute(model.matrix, result, model.n);
             littleShortestPath = helpers.countRoute(model.matrix, result, model.n);
@@ -84,7 +84,7 @@ void App::runAlgorithms() {
             begin = std::chrono::steady_clock::now();
             result = dynamicProg.algorithm(model.matrix, model.n);
             end = std::chrono::steady_clock::now();
-            diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+            diff = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
             durationTime = (double)diff.count() / 1000000;
             helpers.displayRoute(model.matrix, result, model.n);
             dynamicShortestPath = helpers.countRoute(model.matrix, result, model.n);
@@ -103,7 +103,7 @@ void App::runTests()
     numberOfTests = menu.inputNumberOfTests();
     auto begin = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
-    auto diff = duration_cast<chrono::nanoseconds>(end - begin);
+    auto diff = std::chrono::duration_cast<chrono::nanoseconds>(end - begin);
     double *avgResults = new double[config.arrLen];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
     string name = "";
     srand(time(NULL));
@@ -123,7 +123,7 @@ void App::runTests()
                 begin = std::chrono::steady_clock::now();
                 result = bruteForce.algorithm(model.matrix, model.n);
                 end = std::chrono::steady_clock::now();
-                diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+                diff = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
                 totalDurTime += (double)diff.count() / 1000000;
                 break;
 
@@ -132,7 +132,7 @@ void App::runTests()
                 begin = std::chrono::steady_clock::now();
                 result = little.algorithm(model.matrix, model.n);
                 end = std::chrono::steady_clock::now();
-                diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+                diff = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
                 totalDurTime += (double)diff.count() / 1000000;
                     break;
             case '3':
@@ -140,7 +140,7 @@ void App::runTests()
                 begin = std::chrono::steady_clock::now();
                 result = dynamicProg.algorithm(model.matrix, model.n);
                 end = std::chrono::steady_clock::now();
-                diff = duration_cast<std::chrono::nanoseconds>(end - begin);
+                diff = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
                 totalDurTime += (double)diff.count() / 1000000;
                 break;
             };

@@ -9,7 +9,7 @@
 #include "algorithms/BruteForce.h"
 #include "Helpers.h"
 #include "algorithms/DynamicProg.h"
-#include "algorithms/LittleNew.h"
+#include "algorithms/Little.h"
 
 
 class App {
