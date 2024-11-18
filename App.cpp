@@ -30,6 +30,7 @@ void App::run() {
                 if (isMatrix) model.freeMatrix();
                 model.loadMatrixFromFile(menu.inputPath());
                 cout << "Twoja macierz to: " << endl;
+                isMatrix = true;
                 helpers.displayMatrix(model.matrix,model.n);
                 runAlgorithms();
                 break;
