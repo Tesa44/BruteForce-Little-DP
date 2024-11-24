@@ -50,8 +50,8 @@ void Model::generateMatrix(int matrixSize) {
     n = matrixSize;
     initMatrix();
 
-    int maxPath = config.maxGeneratedPath;
-    int minPath = config.minGeneratedPath;
+    int maxPath = MAX_PATH;
+    int minPath = MIN_PATH;
     int path;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {

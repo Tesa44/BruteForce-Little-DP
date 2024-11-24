@@ -10,7 +10,6 @@
 
 class Model {
 private:
-    Config config;
     void initMatrix();  //Utworzenie macierzy o rozmiarze n wypełnionej zerami
 public:
     int **matrix;

@@ -22,7 +22,6 @@ class App {
         Little little;
         DynamicProg dynamicProg;
         Helpers helpers;
-        Config config;
 
         double durationTime = 0;
         int numberOfTests = 0;

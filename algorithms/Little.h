@@ -37,6 +37,7 @@ private:
     void replaceZeroesWithINF(int** matrix, int size);
     int reduceMatrix(int** matrix, int size);
     Node createNode(int** parentMatrix, int level, int i, int j, int parentCost, std::vector<int> path, int size);
+    double calculateSymmetry(int** matrix, int size);
 };
 
 #endif //PEA_PROJEKT_1_LITTLENEW_H

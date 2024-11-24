@@ -3,6 +3,7 @@
 //
 
 #include "App.h"
+#include "Config.h"
 #include <chrono>
 
 void App::run() {
@@ -105,11 +106,11 @@ void App::runTests()
     auto begin = std::chrono::steady_clock::now();
     auto end = std::chrono::steady_clock::now();
     auto diff = std::chrono::duration_cast<chrono::nanoseconds>(end - begin);
-    double *avgResults = new double[config.arrLen];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
+    double *avgResults = new double[LEN_TEST];   //Tablica do przechowywania śrenidch wyników z każdej ilości miast do testowania
     string name = "";
     srand(time(NULL));
-    for (int i = 0; i <config.arrLen; i++) {
-        model.n = config.numberOfCities[i];
+    for (int i = 0; i <LEN_TEST; i++) {
+        model.n = TEST_CITIES[i];
         double totalDurTime = 0;
         double avgDurTime = 0;
         int* result = new int[model.n + 1];
@@ -137,7 +138,7 @@ void App::runTests()
                 totalDurTime += (double)diff.count() / 1000000;
                     break;
             case '3':
-                name = "Dynamic Programming";
+                name = "Programowanie dynamiczne";
                 begin = std::chrono::steady_clock::now();
                 result = dynamicProg.algorithm(model.matrix, model.n);
                 end = std::chrono::steady_clock::now();
@@ -157,8 +158,8 @@ void App::runTests()
     avgResults[i] = avgDurTime;
     }
     cout << "------- Podsumowanie -------" << endl;
-    for (int i = 0; i < config.arrLen; i ++){
-        cout << "Sredni czas algorytmu dla " << config.numberOfCities[i] << " miast to " << avgResults[i] << " [ms]" << endl;
+    for (int i = 0; i < LEN_TEST; i ++){
+        cout << "Sredni czas algorytmu dla " << TEST_CITIES[i] << " miast to " << avgResults[i] << " [ms]" << endl;
     }
     cout << endl;
 }
