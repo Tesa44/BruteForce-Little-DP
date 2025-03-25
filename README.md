@@ -56,7 +56,7 @@ możliwą trasę.
 ### Uruchomienie programu
 1. Sklonuj repozytorium:
     ```sh
-   git clone https://github.com/Tesa44/PEA-projekt-1.git
+   git clone https://github.com/Tesa44/BruteForce-Little-DP.git
 2. Otwórz projekt w CLion
 3. Skonfiguruj kompilator
 4. Zbuduj projekt
@@ -82,7 +82,7 @@ The Bellman-Held-Karp algorithm, based on dynamic programming, solves the Travel
 ### Startup
 1. Clone the repo
    ```sh
-   git clone https://github.com/Tesa44/PEA-projekt-1.git
+   git clone https://github.com/Tesa44/BruteForce-Little-DP.git
 2. Open project in CLion
 3. Configure compiler
 4. Build the project
